@@ -1,0 +1,26 @@
+
+name: Build Crinmison PSP
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: pspdev/pspdev:latest
+
+    steps:
+      - name: Baixar projeto
+        uses: actions/checkout@v4
+
+      - name: Compilar jogo
+        run: make
+
+      - name: Salvar EBOOT
+        uses: actions/upload-artifact@v4
+        with:
+          name: Crinmison-PSP
+          path: EBOOT.PBP
