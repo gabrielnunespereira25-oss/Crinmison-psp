@@ -16,11 +16,16 @@ jobs:
       - name: Baixar projeto
         uses: actions/checkout@v4
 
+      - name: Extrair arquivos do jogo
+        run: unzip -o Crinmison_PSP_Base.zip -d .
+
       - name: Compilar jogo
         run: make
 
-      - name: Salvar EBOOT
+      - name: Salvar jogo e sprites
         uses: actions/upload-artifact@v4
         with:
           name: Crinmison-PSP
-          path: EBOOT.PBP
+          path: |
+            EBOOT.PBP
+            assets/sprites/
